@@ -1,0 +1,3 @@
+django
+django-simplecms==1.0.5
+mollie-api-python==2.3.0

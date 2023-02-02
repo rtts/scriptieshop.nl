@@ -1,0 +1,26 @@
+{% load cms %}
+
+<section class="upload" id="upload">
+  <div class="wrapper">
+    <h1>{{section.title}}</h1>
+    {% eval section.content %}
+
+    <div class="spacer"></div>
+
+    <form method="post" class="cms upload" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for error in form.non_field_errors %}
+        <p style="color:red; margin-top:0">{{error}}</p>
+      {% endfor %}
+      {% for field in form %}
+        {% include 'cms/formfield.html' with field=field %}
+      {% endfor %}
+      <div class="spacer"></div>
+      <button class="button" name="section" value="{{section.pk}}">Bereken Prijs</button>
+    </form>
+
+    <div class="spacer"></div>
+
+    {% editsection '<img src="/static/cms/edit.png">' %}
+  </div>
+</section>

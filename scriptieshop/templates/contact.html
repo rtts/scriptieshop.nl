@@ -1,0 +1,22 @@
+{% load cms %}
+
+<section class="contact">
+  <div class="wrapper">
+    <div class="title">
+      <h1>{{section.title}}</h1>
+    </div>
+
+    <div class="form">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+          {% include 'cms/formfield.html' with field=field %}
+        {% endfor %}
+        <div class="spacer"></div>
+        <button class="button" name="section" value="{{section.pk}}">Verstuur</button>
+      </form>
+    </div>
+
+    {% editsection '<img src="/static/cms/edit.png">' %}
+  </div>
+</section>

@@ -1,0 +1,194 @@
+{% extends 'cms/admin.html' %}
+{% load static %}
+
+{% block content %}
+  <div style="margin: 1em auto; max-width: 1000px">
+
+    <form method="post" style="background: white !important">
+      {% csrf_token %}
+      <div class="edit page">
+        <button><img src="{% static 'cms/save.png' %}" width="75"></button>
+      </div>
+
+      <pre>
+        lijmband: <input type="number" oninput="update(this)" name="glue1" value="{{glue1}}">          metalen ring: <input type="number" oninput="update(this)" name="metal1" value="{{metal1}}">          plastic ring: <input type="number" oninput="update(this)" name="plastic1" value="{{plastic1}}">
+lijmband per vel: <input type="number" oninput="update(this)" name="glue2" value="{{glue2}}">  metalen ring per vel: <input type="number" oninput="update(this)" name="metal2" value="{{metal2}}">  plastic ring per vel: <input type="number" oninput="update(this)" name="plastic2" value="{{plastic2}}">
+      </pre>
+      <input type="hidden" name="vat" value="{{vat.value}}">
+
+
+      <p style="color:red">
+        Let op: alle prijzen zijn inclusief {{vat.value}}% btw
+      </p>
+
+      <style>
+        input { width: 50px }
+      </style>
+    </form>
+
+    <canvas id="myChart" width="400" height="200"></canvas>
+  </div>
+{% endblock %}
+
+{% block extrabody %}
+  <script src="{% static 'Chart.js' %}"></script>
+  <script>
+    var ctx = document.getElementById("myChart");
+    var glue1 = {{glue1}};
+    var glue2 = {{glue2}};
+    var metal1 = {{metal1}};
+    var metal2 = {{metal2}};
+    var plastic1 = {{plastic1}};
+    var plastic2 = {{plastic2}};
+    var data = create_data();
+    console.log(data);
+    var myChart;
+
+    function update(el) {
+        window[el.name] = parseInt(el.value);
+        myChart.destroy();
+        data = create_data();
+        create_chart();
+    }
+
+    function create_chart(){
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                spanGaps: true,
+                legend: {
+                    display: false,
+                },
+                animation: {
+                    duration: 0,
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            label = '';
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                },
+                scales: {
+                    xAxes: [{ position: 'top' }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    function glue() {
+        return function(x) {
+            let price = (glue1/100) + x * (glue2/10000);
+            return Math.round(4*price)/4;
+        };
+    }
+
+    function metal() {
+        return function(x) {
+            let price = (metal1/100) + x * (metal2/10000);
+            return Math.round(4*price)/4;
+        };
+    }
+
+    function plastic() {
+        return function(x) {
+            let price = (plastic1/100) + x * (plastic2/10000);
+            return Math.round(4*price)/4;
+        };
+    }
+
+    function create_data() {
+        let labels = [1];
+        for (let i = 1; i <= 30; i++) {
+            labels.push(i*10);
+        }
+        return {
+            labels: labels,
+            datasets: [
+                {
+                    function: glue(),
+                    data: [],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#0d0d9d',
+                },
+                {
+                    function: metal(),
+                    data: [],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#f69',
+                },
+                {
+                    function: plastic(),
+                    data: [],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#5ad258',
+                },
+                {
+                    function: function(x) { return 0 },
+                    data: [
+                        1.50, null, null, null, null, null, null, null, null, null,
+                        null, 1.50, 2.00, null, null, null, null, null, null, null,
+                        null, null, null, null, 2.00, 2.50, null, null, null, null,
+                        null, null, null, null, null, null, null, null, null, 2.50,
+                    ],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#a4a4df',
+                },
+                {
+                    function: function(x) { return 0 },
+                    data: [
+                        2.00, 2.00, 2.22, 2.22, 2.30, 2.78, 2.78, 3.11, 3.44, 3.44,
+                        4.16, 4.16, 4.94, 4.94, 5.55, null, 5.55, 6.44, null, 6.44,
+                        8.33, null, null, null, null, null, 8.33, 11.10, null, null,
+                        null, null, null, null, null, null, null, null, null, 11.10,
+                    ],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#edb2c0',
+                },
+                {
+                    function: function(x) { return 0 },
+                    data: [
+                        1.75, null, null, 1.75, 2.00, 2.00, 2.30, 2.30, 2.50, 2.50,
+                        2.80, 2.80, 3.00, null, 3.00, 3.50, null, 3.50, 4.10, null,
+                        4.10, 4.80, null, 4.80, 5.50, null, null, 5.50, 6.20, null,
+                        null, null, null, null, null, null, null, null, null, 6.20,
+                    ],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#c6efc5',
+                },
+            ],
+        }
+    }
+
+    Chart.pluginService.register({
+        beforeInit: function(chart) {
+            var data = chart.config.data;
+            for (var i = 0; i < data.datasets.length; i++) {
+                for (var j = 0; j < data.labels.length; j++) {
+            	    var fct = data.datasets[i].function,
+                        x = data.labels[j],
+                        y = fct(x);
+                    data.datasets[i].data.push(y);
+                }
+            }
+        }
+    });
+
+    create_chart();
+  </script>
+{% endblock %}

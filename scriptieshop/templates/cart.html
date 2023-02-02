@@ -1,0 +1,124 @@
+{% load static cms %}
+
+<section class="cart" id="cart">
+  <div class="wrapper">
+    <center>
+      {% eval section.content %}
+    </center>
+
+    <form method="post" class="cart" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="hidden" name="section" value="{{section.pk}}">
+      {{form.formset.management_form}}
+
+      {% if form.formset.errors %}
+        <div class="global_error">
+          Oeps! Er is iets misgegaan bij het opslaan. Herstel a.u.b. de onderstaande fouten en probeer het opnieuw.
+        </div>
+      {% endif %}
+
+      {% for form in form.formset %}
+        {% for field in form.hidden_fields %}{{field}}{% endfor %}
+        <div class="print">
+          <h2>
+            {{form.print.price.amount}} x {{form.print}}
+          </h2>
+
+          {% if form.instance.count_pages %}
+            {% if not form.print.file %}
+              {% include 'cms/formfield.html' with field=form.file %}
+              <div class="spacer"></div>
+            {% endif %}
+
+            {% for item in form.print.price.items %}
+              {% if item.subsubtotal > 0 %}{{item.amount}} x {% endif %}{{item.description|safe}} <span>{{item.subsubtotal|floatformat:2}}</span><br>
+            {% endfor %}
+
+            <label class="toggle" for="toggle{{forloop.counter}}">bewerken</label> -
+            <label class="toggle"><a href="{% url 'forget' form.print.pk %}">verwijderen</a></label>
+            <input type="checkbox" class="toggle" id="toggle{{forloop.counter}}">
+            <div class="collapse">
+              {% include 'cms/formfield.html' with field=form.duplex %}
+              {% include 'cms/formfield.html' with field=form.papertype %}
+              {% include 'cms/formfield.html' with field=form.binding %}
+              {% include 'cms/formfield.html' with field=form.front_cover %}
+              {% include 'cms/formfield.html' with field=form.back_cover %}
+            </div>
+            {% include 'cms/formfield.html' with field=form.amount %}
+            <div class="subtotal">Subtotaal: €{{form.print.price.subtotal|floatformat:"2"}}</div>
+          {% else %}
+            <div hidden style="display:none">
+              {% include 'cms/formfield.html' with field=form.duplex %}
+              {% include 'cms/formfield.html' with field=form.papertype %}
+              {% include 'cms/formfield.html' with field=form.binding %}
+              {% include 'cms/formfield.html' with field=form.front_cover %}
+              {% include 'cms/formfield.html' with field=form.back_cover %}
+              {% include 'cms/formfield.html' with field=form.amount %}
+            </div>
+            <div class="global_error">
+              Oeps! Het bestand dat je hebt gestuurd is geen geldig PDF bestand :(
+            </div>
+            <label class="toggle"><a href="{% url 'forget' form.print.pk %}">verwijderen</a></label>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <div class="add">
+        <label class="toggle" for="add"><img src="{% static 'plus.svg' %}" width="23"> Document toevoegen</label>
+        <input type="checkbox" class="toggle" id="add">
+        <div class="collapse addform">
+          {% for error in form.non_field_errors %}
+            <p style="color:red; margin-top:0">{{error}}</p>
+          {% endfor %}
+          {% include 'cms/formfield.html' with field=form.bw_pages %}
+          {% include 'cms/formfield.html' with field=form.fc_pages %}
+          {% include 'cms/formfield.html' with field=form.file %}
+          {% include 'cms/formfield.html' with field=form.duplex %}
+          {% include 'cms/formfield.html' with field=form.papertype %}
+          {% include 'cms/formfield.html' with field=form.binding %}
+          {% include 'cms/formfield.html' with field=form.front_cover %}
+          {% include 'cms/formfield.html' with field=form.back_cover %}
+          <div class="spacer"></div>
+          <button class="button">Toevoegen</button>
+          <div class="spacer"></div>
+        </div>
+      </div>
+
+      <div class="total">Totaal <small>(inclusief {{vat}}% btw)</small>: €{{form.total|floatformat:"2"}}</div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <div class="button">
+        <a href="{{section.href}}" {% if invalid %}class="invalid" onclick="return false"{% endif %}>Bestellen!</a>
+      </div>
+
+      {% if invalid %}
+        <div style="max-width: 400px; margin: auto; text-align: center">
+          Zorg dat je bij elk document hierboven een PDF bestand upload. Daarna kun je bestellen!
+        </div>
+      {% endif %}
+
+    </form>
+
+
+    <div class="spacer"></div>
+    {% if perms.scriptieshop.change_variable %}
+      <div class="edit">
+        <a class="edit" href="{% url 'admin:scriptieshop_variable_change' 18 %}">verzendkosten</a>
+        <a class="edit" href="{% url 'bwprice' %}">zwart/witprijzen</a>
+        <a class="edit" href="{% url 'fcprice' %}">kleurenprijzen</a>
+        <a class="edit" href="{% url 'bindprice' %}">inbindprijzen</a>
+      </div>
+    {% endif %}
+    <div class="spacer"></div>
+
+    {% editsection '<img src="/static/cms/edit.png">' %}
+  </div>
+</section>
+<script>
+  for (let widget of document.querySelectorAll('div.print input[type=file], div.print select')) {
+      widget.addEventListener('input', function() {
+          this.form.submit();
+      });
+  }
+</script>

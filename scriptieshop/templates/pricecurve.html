@@ -1,0 +1,219 @@
+{% extends 'cms/admin.html' %}
+{% load static %}
+
+{% block content %}
+  <div style="margin: 1em auto; max-width: 1000px">
+
+    <form method="post" style="background: white !important">
+      {% csrf_token %}
+      <div class="edit page">
+        <button><img src="{% static 'cms/save.png' %}" width="75"></button>
+      </div>
+      <pre>
+winstfactor: <input type="number" oninput="chartfactor(this)" name="factor" value="{{factor}}">   maximum: <input type="number" oninput="chartmax(this)" name="maximum" value="{{maximum}}">
+beginprijs:  <input type="number" oninput="charta(this)" name="begin" value="{{begin}}">   minimum: <input type="number" oninput="chartmin(this)" name="minimum" value="{{minimum}}">
+eindprijs:   <input type="number" oninput="chartb(this)" name="end" value="{{end}}">
+      </pre>
+      <input type="hidden" name="vat" value="{{vat.value}}">
+    </form>
+
+    <p style="color:red; position: absolute; top: 1em; right: 1em">
+      Let op: alle prijzen zijn inclusief {{vat.value}}% btw
+    </p>
+
+    <style>
+      input { width: 50px }
+    </style>
+    <canvas id="myChart" width="400" height="200"></canvas>
+  </div>
+{% endblock %}
+
+{% block extrabody %}
+  <script src="{% static 'Chart.js' %}"></script>
+  <script>
+    var ctx = document.getElementById("myChart");
+    var factor = {{factor}};
+    var a = {{begin}};
+    var b = {{end}};
+    var min = {{minimum}};
+    var max = {{maximum}};
+    var data = create_data(factor, a, b, max, min);
+    var myChart;
+
+    function chartfactor(el) {
+        factor = parseInt(el.value);
+        myChart.destroy();
+        data = create_data(factor, a, b, max, min);
+        create_chart(data);
+    }
+    function charta(el) {
+        a = parseInt(el.value);
+        myChart.destroy();
+        data = create_data(factor, a, b, max, min);
+        create_chart(data);
+    }
+    function chartb(el) {
+        b = parseInt(el.value);
+        myChart.destroy();
+        data = create_data(factor, a, b, max, min);
+        create_chart(data);
+    }
+    function chartmin(el) {
+        min = parseInt(el.value);
+        myChart.destroy();
+        data = create_data(factor, a, b, max, min);
+        create_chart(data);
+    }
+    function chartmax(el) {
+        max = parseInt(el.value);
+        myChart.destroy();
+        data = create_data(factor, a, b, max, min);
+        create_chart(data);
+    }
+
+    function create_chart(data){
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                spanGaps: true,
+                legend: {
+                    display: false,
+                },
+                animation: {
+                    duration: 0,
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            label = '';
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                },
+                scales: {
+                    xAxes: [{ position: 'top' }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    function formula(factor, a, b, max, min) {
+        factor = factor / 10;
+        a = a/1000;
+        b = b/1000;
+        max = max/1000;
+        min = min/1000;
+        return function(x) {
+            let rate = factor / ((x-1) + factor / (a-b)) + b;
+            return Math.min(max, Math.max(min, rate));
+        };
+    }
+
+    function create_data(factor, a, b, max, min) {
+        let labels = [1];
+        for (let i = 1; i <= 100; i++) {
+            labels.push(i*5);
+        }
+        return {
+            labels: labels,
+            datasets: [
+                {
+                    function: formula(factor, a, b, max, min),
+                    data: [],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#69f',
+                },
+                {% if include_legacy_fc %}
+                {
+                    function: function(x) { return 0 },
+                    data: [0.50, 0.50, 0.44, null, 0.44, 0.36, null, null, 0.36, null,
+                           0.28, null, null, null, null, null, null, 0.28, null, null,
+                           0.22, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, 0.22, null, null, null,
+                           0.20, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, 0.20, null, null, null, null, null,
+                           0.18, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, 0.18, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           0.16, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, 0.16, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           0.15,
+                    ],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#fc9',
+                    pointBorderColor: '#f00',
+                    pointBackgroundColor: '#f00',
+                },
+                {% endif %}
+                {% if include_legacy_bw %}
+                {
+                    function: function(x) { return 0 },
+                    data: [0.10, 0.10, 0.09, null, 0.09, 0.08, null, null, 0.08, null,
+                           0.07, null, null, null, null, null, null, 0.07, null, null,
+                           0.06, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           0.06, null, null, null, null, null, null, null, null, null,
+                           0.05, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           0.05, null, null, null, null, null, null, null, null, null,
+                           null, null, null, null, null, null, null, null, null, null,
+                           0.045,
+                    ],
+                    fill: false,
+                    lineTension: 0,
+                    borderColor: '#fc9',
+                    pointBorderColor: '#f00',
+                    pointBackgroundColor: '#f00',
+                },
+                {% endif %}
+            ],
+        }
+    }
+
+    Chart.pluginService.register({
+        beforeInit: function(chart) {
+            var data = chart.config.data;
+            for (var i = 0; i < data.datasets.length; i++) {
+                for (var j = 0; j < data.labels.length; j++) {
+            	    var fct = data.datasets[i].function,
+                        x = data.labels[j],
+                        y = fct(x);
+                    data.datasets[i].data.push(y);
+                }
+            }
+        }
+    });
+
+    create_chart(data);
+  </script>
+{% endblock %}

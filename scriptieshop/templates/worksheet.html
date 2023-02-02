@@ -1,0 +1,88 @@
+{% load static %}
+
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}Scriptieshop.nl{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'main10.scss.css' %}">
+    <link rel="icon" href="{% static 'favicon.png' %}">
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body class="worksheet">
+
+    <header>
+      <a href="{% url 'admin:scriptieshop_order_changelist' %}"><img src="{% static 'logo.svg' %}" alt="Scriptieshop.nl"></a>
+    </header>
+
+    {% block content %}
+      <section class="worksheet">
+        <div class="wrapper">
+          <div class="details">
+            <dl>
+              <dt>Datum:</dt>
+              <dd>{{order.created}}</dd>
+
+              <dt>Naam:</dt>
+              <dd>{{order.customer}}</dd>
+
+              <dt>Adres:</dt>
+              <dd>{{order.address}}</dd>
+
+              <dt>Levering:</dt>
+              <dd>{{order.get_shipping_display}}</dd>
+            </dl>
+            <dl>
+              <dt>Telefoon:</dt>
+              <dd>{{order.phone}}</dd>
+
+              <dt>Email:</dt>
+              <dd>{{order.email}}</dd>
+
+              <dt>Totaalbedrag:</dt>
+              <dd>{{order.total}}</dd>
+
+              <dt>Status:</dt>
+              <dd>{{order.get_status_display}}</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrapper masonry">
+        <div>
+          <section style="height:100%">
+            <h2>Bestelling</h2>
+            {% for print in prints %}
+              <div class="paper" style="background:white">
+                <h3><span>{{print.amount}}x</span> <a href="{% url 'download' %}{{print.file.name}}">{{print}}</a></h3>
+                {{print.get_duplex_display}}<br>
+                {{print.get_papertype_display}}<br>
+                Inbinden met {{print.get_binding_display}}<br>
+                Voorkaft: {{print.get_front_cover_display}}<br>
+                Achterkaft: {{print.get_back_cover_display}}<br>
+              </div>
+            {% endfor %}
+          </section>
+        </div>
+
+        <div>
+          <section>
+            <h2>Opmerking</h2>
+            <div class="paper" style="min-height: 100px; background:white">
+              {{object.notes}}
+            </div>
+          </section>
+
+          <section>
+            <h2>Notities</h2>
+            <div class="paper" style="min-height: 200px">
+            </div>
+          </section>
+        </div>
+      </div>
+    {% endblock %}
+
+  </body>
+</html>

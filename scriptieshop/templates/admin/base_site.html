@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Scriptieshop.nl{% endblock %}
+
+{% block extrahead %}
+  <style>
+    #header {
+        color: #0195cb !important;
+        background: white !important;
+    }
+    #header a {
+        color: #0195cb !important;
+    }
+    a:link, a:visited {
+        color: #0195cb;
+    }
+
+    .module h2, .module caption, .inline-group h2 {
+        color: white !important;
+        background: #0195cb !important;
+    }
+    div.breadcrumbs {
+        background: #ffc969 !important;
+        background: #0195cb !important;
+    }
+  </style>
+{% endblock %}
+
+{% block branding %}
+  <a href="/"><img src="{% static 'logo.svg' %}" width="200"></a>
+{% endblock %}

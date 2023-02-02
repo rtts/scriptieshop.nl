@@ -1,0 +1,42 @@
+{% load cms %}
+
+<section class="checkout">
+  <div class="wrapper">
+    {% eval section.content %}
+
+    {% if prints %}
+      <div class="prints">
+        {% for print in prints %}
+          <div class="print">
+            <h3>{{print.amount}}x {{print}}<br>
+              <small>({{print.get_duplex_display|lower}}, ingebonden met {{print.get_binding_display|lower}}, voorkaft {{print.get_front_cover_display|lower}}, achterkaft {{print.get_back_cover_display|lower}})</small>
+            </h3>
+          </div>
+        {% endfor %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="shipping">
+            <label><input type="radio" name="shipping" value="False" required checked>Afhalen op onze vestiging in Den Bosch</label>
+            <label><input type="radio" name="shipping" value="True" required >Verzenden (+ €{{shipping_costs|floatformat:"2"}})</label>
+          </div>
+          <div class="total">Totaalbedrag: €{{cart.total|floatformat:"2"}}</div>
+
+          {% include 'cms/formfield.html' with field=form.customer %}
+          {% include 'cms/formfield.html' with field=form.email %}
+          {% include 'cms/formfield.html' with field=form.address %}
+          {% include 'cms/formfield.html' with field=form.phone %}
+          {% include 'cms/formfield.html' with field=form.notes %}
+
+          <div class="spacer"></div>
+          <button class="button" name="section" value="{{section.pk}}">Bevestig deze bestelling</button>
+
+          <p>Door deze bestelling te bevestigen ga je akkoord met onze <a href="/voorwaarden/">Algemene Voorwaarden</a></p>
+        </form>
+      </div>
+    {% endif %}
+
+    {% editsection '<img src="/static/cms/edit.png">' %}
+  </div>
+</section>

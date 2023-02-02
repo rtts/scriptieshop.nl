@@ -1,0 +1,28 @@
+{% load cms static %}
+
+<section class="steps">
+  <div class="wrapper">
+    {% eval section.content %}
+
+    <div class="spacer"></div>
+
+    <h1>{{section.title}}</h1>
+
+    <div class="steps">
+      <div>
+        <img src="{% static 'upload.svg' %}">
+        <h2>1. Bereken wat <br> het kost</h2>
+      </div>
+      <div>
+        <img src="{% static 'print.svg' %}">
+        <h2>2. Plaats je bestelling</h2>
+      </div>
+      <div>
+        <img src="{% static 'deliver.svg' %}">
+        <h2>3. Bezorgen of afhalen</h2>
+      </div>
+    </div>
+
+    {% editsection '<img src="/static/cms/edit.png">' %}
+  </div>
+</section>
