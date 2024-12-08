@@ -10,6 +10,9 @@ prints ordered:
 
 ![Bulk pricing](bulk.png)
 
+The original website has been archived on
+https://scriptieshop.created.today/
+
 If you're just here for the secret formula, see
 [utils.py:146](scriptieshop/utils.py#L146).
 

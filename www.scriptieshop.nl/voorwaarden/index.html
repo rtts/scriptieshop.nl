@@ -1,0 +1,120 @@
+
+
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <title>Scriptieshop.nl - Voorwaarden incl retour &amp; klacht</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/hamburgers.css">
+    <link rel="stylesheet" href="../static/main10.scss.css">
+    <link rel="icon" href="https://www.scriptieshop.nl/static/favicon.png">
+    
+  </head>
+  <body>
+    
+
+      <header>
+        
+          
+            <img src="../static/logo.svg" alt="Scriptieshop.nl">
+          
+        
+      </header>
+
+      <nav>
+        
+          
+            <ul id="menu">
+              
+                <li><a href="../index.html" >Homepage</a></li>
+              
+                <li><a href="../over-ons/index.html" >Over ons</a></li>
+              
+                <li><a href="index.html" class="current">Voorwaarden incl retour &amp; klacht</a></li>
+              
+                <li><a href="../aanlever-specificaties/index.html" >Aanlever specificaties</a></li>
+              
+                <li><a href="../kostenbetalen/index.html" >Verz kosten + betalen</a></li>
+              
+                <li><a href="../cart/index.html" >Winkelwagentje</a></li>
+              
+                <li><a href="../Contact/index.html" >Contact</a></li>
+              
+              
+            </ul>
+          
+          <button class="hamburger hamburger--collapse" id='hamburger'>
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        
+      </nav>
+
+      <article>
+        
+  
+    <div id="algemene-voorwaarden"></div>
+    
+
+<section class="text">
+  <div class="wrapper">
+    <div class="title">
+      <h1>
+        Algemene voorwaarden
+      </h1>
+    </div>
+
+    <div class="content">
+      <h2>Persoonsgegevens</h2>
+<p>Bij het bestellen van een opdracht verstrekt u ons persoonsgegevens waar wij uiterst vertrouwelijk mee om gaan. We delen de gegevens niet met derden. De door u verstrekte bestanden worden na het versturen van de opdracht definitief verwijderd uit ons systeem.</p>
+<h2>Retourneren en klachten</h2>
+<p>Producten die u via deze webwinkel koopt worden op maat volgens de door u ingevoerde specificatie gemaakt. Het herroepingsrecht en de 14 dagen bedenktijd zijn dan ook niet van toepassing. De verkoop is hiermee na succesvolle betaling definitief en retourneren is niet mogelijk. </p>
+<p>Bij duidelijk verwijtbare fouten onzerzijds stelt u ons in de gelegenheid dit te herstellen, als dit op geen enkele manier mogelijk is  vergoeden wij u - in overleg - maximaal het door u betaalde bedrag. Wij kunnen geen enkele verantwoordelijkheid nemen voor de inhoud, lay-out of  fouten in uw bestand, controleer uw bestand goed voor u het verzend. Ontdekt u na ontvangst alsnog een fout uwerzijds, neem contact met ons op voor enige coulance in de prijs bij het opnieuw uitvoeren van uw verbeterde opdracht.</p>
+<p>Wij krijgen zelden een klacht, maar als het toch voorkomt kunt u 073-6133131 bellen en naar Audrey vragen. Zijn wij er niet geef dan uw nummer en u wordt z.s.m. terug gebeld. </p>
+<h2>Kleurechtheid</h2>
+<p>Kleurtinten op een beeldscherm komen (iets) anders over dan op papier mogelijk is. Desalniettemin werken wij met de beste, modernste Canon print-systemen, het beste papier en hebben al ruim 37 jaar ervaring met als resultaat vrijwel 100% tevreden klanten.</p>
+<h2>Tevredenheid</h2>
+<p>Ons doel is u als klant zo tevreden te krijgen, dat u graag weer besteld en het aan anderen doorgeeft.</p>
+    </div>
+
+    
+  </div>
+</section>
+
+  
+
+  
+
+      </article>
+
+      
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+          var hamburger = document.getElementById('hamburger');
+          var menu = document.getElementById('menu');
+          hamburger.addEventListener('click', function(e) {
+              hamburger.classList.toggle('is-active');
+              menu.classList.toggle('visible');
+          });
+
+          var links = document.querySelectorAll('a');
+          for (var link of links) {
+              var a = new RegExp('/' + window.location.host + '/');
+              if (!a.test(link.href)) {
+                  link.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          }
+      });
+    </script>
+    
+  </body>
+</html>

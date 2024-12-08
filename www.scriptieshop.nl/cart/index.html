@@ -1,0 +1,332 @@
+
+
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <title>Scriptieshop.nl - Winkelwagentje</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/hamburgers.css">
+    <link rel="stylesheet" href="../static/main10.scss.css">
+    <link rel="icon" href="https://www.scriptieshop.nl/static/favicon.png">
+    
+  </head>
+  <body>
+    
+
+      <header>
+        
+          
+            <img src="../static/logo.svg" alt="Scriptieshop.nl">
+          
+        
+      </header>
+
+      <nav>
+        
+          
+            <ul id="menu">
+              
+                <li><a href="../index.html" >Homepage</a></li>
+              
+                <li><a href="../over-ons/index.html" >Over ons</a></li>
+              
+                <li><a href="../voorwaarden/index.html" >Voorwaarden incl retour &amp; klacht</a></li>
+              
+                <li><a href="../aanlever-specificaties/index.html" >Aanlever specificaties</a></li>
+              
+                <li><a href="../kostenbetalen/index.html" >Verz kosten + betalen</a></li>
+              
+                <li><a href="index.html" class="current">Winkelwagentje</a></li>
+              
+                <li><a href="../Contact/index.html" >Contact</a></li>
+              
+              
+            </ul>
+          
+          <button class="hamburger hamburger--collapse" id='hamburger'>
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        
+      </nav>
+
+      <article>
+        
+  
+    <div id="winkelwagentje"></div>
+    
+
+<section class="cart" id="cart">
+  <div class="wrapper">
+    <center>
+      <p>Hieronder zie je de berekening van alle kosten. Wil je de bestelling plaatsen? Zorg dan dat er bij elke printopdracht een PDF bestand is geupload. Klik vervolgens op &ldquo;Bestellen&rdquo;!</p>
+    </center>
+
+    <form method="post" class="cart" enctype="multipart/form-data">
+      <input type="hidden" name="csrfmiddlewaretoken" value="ewdkYsImgoRqP8oC6h0sCipQ1ETF0eCnq3CD2jEWZi0Kj2HO0gH1JXZk6F2Z8X5z">
+      <input type="hidden" name="section" value="3">
+      <input type="hidden" name="form-TOTAL_FORMS" value="0" id="id_form-TOTAL_FORMS"><input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS"><input type="hidden" name="form-MIN_NUM_FORMS" value="0" id="id_form-MIN_NUM_FORMS"><input type="hidden" name="form-MAX_NUM_FORMS" value="1000" id="id_form-MAX_NUM_FORMS">
+
+      
+
+      
+
+      <div class="add">
+        <label class="toggle" for="add"><img src="../static/plus.svg" width="23"> Document toevoegen</label>
+        <input type="checkbox" class="toggle" id="add">
+        <div class="collapse addform">
+          
+          
+  <div class="formfield bw_pages" id="formfield_bw_pages">
+
+    
+
+    
+      <div class="label">
+        <label for="id_bw_pages">Aantal zijdes z/w</label>
+      </div>
+      <div class="input">
+        <input type="number" name="bw_pages" value="0" min="0" required id="id_bw_pages">
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield fc_pages" id="formfield_fc_pages">
+
+    
+
+    
+      <div class="label">
+        <label for="id_fc_pages">Aantal zijdes kleur</label>
+      </div>
+      <div class="input">
+        <input type="number" name="fc_pages" value="0" min="0" required id="id_fc_pages">
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield file" id="formfield_file">
+
+    
+
+    
+      <div class="label">
+        <label for="id_file">PDF bestand</label>
+      </div>
+      <div class="input">
+        <input type="file" name="file" id="id_file">
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield duplex" id="formfield_duplex">
+
+    
+
+    
+      <div class="label">
+        <label for="id_duplex">Duplex</label>
+      </div>
+      <div class="input">
+        <select name="duplex" id="id_duplex">
+  <option value="False" selected>Enkelzijdig</option>
+
+  <option value="True">Dubbelzijdig</option>
+
+</select>
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield papertype" id="formfield_papertype">
+
+    
+
+    
+      <div class="label">
+        <label for="id_papertype">Papiersoort</label>
+      </div>
+      <div class="input">
+        <select name="papertype" id="id_papertype">
+  <option value="10" selected>80 g/m² Navigator</option>
+
+  <option value="20">100 g/m² Color Copy</option>
+
+  <option value="30">120 g/m² Text &amp; Graphics</option>
+
+</select>
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield binding" id="formfield_binding">
+
+    
+
+    
+      <div class="label">
+        <label for="id_binding">Inbinden</label>
+      </div>
+      <div class="input">
+        <select name="binding" id="id_binding">
+  <option value="1" selected>Lijmband</option>
+
+  <option value="2">Metalen Ring</option>
+
+</select>
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield front_cover" id="formfield_front_cover">
+
+    
+
+    
+      <div class="label">
+        <label for="id_front_cover">Voorkaft</label>
+      </div>
+      <div class="input">
+        <select name="front_cover" id="id_front_cover">
+  <option value="10" selected>Transparant mat plastic</option>
+
+  <option value="20">Transparant glossy plastic</option>
+
+  <option value="50">300 g/m² wit papier met bedrukking</option>
+
+</select>
+      </div>
+    
+
+    
+  </div>
+
+
+          
+  <div class="formfield back_cover" id="formfield_back_cover">
+
+    
+
+    
+      <div class="label">
+        <label for="id_back_cover">Achterkaft</label>
+      </div>
+      <div class="input">
+        <select name="back_cover" id="id_back_cover">
+  <option value="10">Transparant mat plastic</option>
+
+  <option value="20">Transparant glossy plastic</option>
+
+  <option value="30" selected>Zwart plastic</option>
+
+  <option value="40">Wit plastic</option>
+
+  <option value="50">300 g/m² wit papier</option>
+
+</select>
+      </div>
+    
+
+    
+  </div>
+
+
+          <div class="spacer"></div>
+          <button class="button">Toevoegen</button>
+          <div class="spacer"></div>
+        </div>
+      </div>
+
+      <div class="total">Totaal <small>(inclusief 9% btw)</small>: €0,00</div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <div class="button">
+        <a href="../bestellen/index.html" class="invalid" onclick="return false">Bestellen!</a>
+      </div>
+
+      
+        <div style="max-width: 400px; margin: auto; text-align: center">
+          Zorg dat je bij elk document hierboven een PDF bestand upload. Daarna kun je bestellen!
+        </div>
+      
+
+    </form>
+
+
+    <div class="spacer"></div>
+    
+    <div class="spacer"></div>
+
+    
+  </div>
+</section>
+<script>
+  for (let widget of document.querySelectorAll('div.print input[type=file], div.print select')) {
+      widget.addEventListener('input', function() {
+          this.form.submit();
+      });
+  }
+</script>
+
+  
+
+  
+
+      </article>
+
+      
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+          var hamburger = document.getElementById('hamburger');
+          var menu = document.getElementById('menu');
+          hamburger.addEventListener('click', function(e) {
+              hamburger.classList.toggle('is-active');
+              menu.classList.toggle('visible');
+          });
+
+          var links = document.querySelectorAll('a');
+          for (var link of links) {
+              var a = new RegExp('/' + window.location.host + '/');
+              if (!a.test(link.href)) {
+                  link.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          }
+      });
+    </script>
+    
+  </body>
+</html>

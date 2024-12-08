@@ -1,0 +1,158 @@
+
+
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <title>Scriptieshop.nl - Over ons</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/hamburgers.css">
+    <link rel="stylesheet" href="../static/main10.scss.css">
+    <link rel="icon" href="https://www.scriptieshop.nl/static/favicon.png">
+    
+  </head>
+  <body>
+    
+
+      <header>
+        
+          
+            <img src="../static/logo.svg" alt="Scriptieshop.nl">
+          
+        
+      </header>
+
+      <nav>
+        
+          
+            <ul id="menu">
+              
+                <li><a href="../index.html" >Homepage</a></li>
+              
+                <li><a href="index.html" class="current">Over ons</a></li>
+              
+                <li><a href="../voorwaarden/index.html" >Voorwaarden incl retour &amp; klacht</a></li>
+              
+                <li><a href="../aanlever-specificaties/index.html" >Aanlever specificaties</a></li>
+              
+                <li><a href="../kostenbetalen/index.html" >Verz kosten + betalen</a></li>
+              
+                <li><a href="../cart/index.html" >Winkelwagentje</a></li>
+              
+                <li><a href="../Contact/index.html" >Contact</a></li>
+              
+              
+            </ul>
+          
+          <button class="hamburger hamburger--collapse" id='hamburger'>
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        
+      </nav>
+
+      <article>
+        
+  
+    <div id="over-ons"></div>
+    
+
+<section class="text">
+  <div class="wrapper">
+    <div class="title">
+      <h1>
+        Over ons
+      </h1>
+    </div>
+
+    <div class="content">
+      <h4>Scriptieshop.nl is de online webshop van <a href="https://www.copyshopdenbosch.nl/">copyshopdenbosch.nl</a></h4>
+<p><a href="../index.html">Scriptieshop.nl</a> is onze webshop waar u uw scriptie, thesis, proefschrift, of enig ander boek online kunt bestellen.</p>
+<p>Met ruim 34 jaar ervaring met de modernste Canon Laserprintsystemen geproduceerd op Navigator of ColorCopy papier. Wij streven naar de beste prijs / kwaliteit verhouding.
+Uw opdracht wordt z.s.m. geprint, gebonden en ter verzending aangeboden zodat het normaliter binnen 2 werkdagen bij u is.</p>
+    </div>
+
+    
+  </div>
+</section>
+
+  
+    <div id="afbeelding"></div>
+    
+
+<section class="image">
+  <div class="wrapper">
+    
+      <div class="image">
+        <img alt="Afbeelding" src="../media/copyshop.jpg.800x800_q85.jpg">
+      </div>
+    
+
+    
+  </div>
+</section>
+
+  
+    <div id="onze-visie-qua-duurzaamheid"></div>
+    
+
+<section class="text">
+  <div class="wrapper">
+    <div class="title">
+      <h1>
+        Onze visie qua duurzaamheid
+      </h1>
+    </div>
+
+    <div class="content">
+      <p>In 1987 waren wij er al van overtuigd dat duurzaam ondernemen de toekomst had, en dat het niet ten koste van de prijs en kwaliteit hoefde te gaan. Integendeel zelfs, het Navigator-papier dat wij toen (en nu nog) afnamen komt voort uit een Verenigde Naties project voor herbebossing van kaal geërodeerd landschap in Portugal en dat papier was en is qua kwaliteit de top. Het is dan ook met FSC-logo en het Europesche milieukeur.</p>
+<p>Inmiddels heeft al ons papier een milieukeur.</p>
+<p>Mede d.m.v. inkoop duurzame energie produceren wij al zo&rsquo;n 19 jaar vrijwel CO2 neutraal.</p>
+<p>Ook gebruiken we al een paar jaar LED verlichting in onze winkel.</p>
+<p>We recyclen ons papier, verpakkingen en afval zo veel mogelijk, o.a. door de doosjes en papierverpakkingen te hergebruiken voor het verpakken van uw opdrachten.</p>
+<p>Onze bedrijfsmiddelen zijn zo &ldquo;groen&rdquo; als de technologie toestaat.</p>
+<p>Het beheersen van ons binnen klimaat; n.l. permanente lucht in en uit ventilatie in combinatie met de modernste elektrostatisch en actief koolfilter luchtreiniging van Euromate n.l. de VisionAirBlueLine . De totale lucht inhoud van onze winkel wordt zo&rsquo;n 6 tot 8 keer per uur ververst en gereinigd van Ozon, fijnstof, schimmels, Bacteriën en zelfs virussen.</p>
+<p>Wij zijn/willen nog altijd met de gemeente &lsquo;s-Hertogenbosch in gesprek over zonnepanelen op ons dak.</p>
+<p>En last but not least is een centrale copy/printshop in principe milieu vriendelijk, door dat heel veel printers en cardridges niet gekocht, dus geproduceerd, vervoerd en later weggegooid hoeven worden. Duizenden mensen per jaar gebruiken 1 van de 11 printsystemen, 3 grootformaat printers, transfer printer of onze wit printer.</p>
+    </div>
+
+    
+  </div>
+</section>
+
+  
+
+  
+
+      </article>
+
+      
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+          var hamburger = document.getElementById('hamburger');
+          var menu = document.getElementById('menu');
+          hamburger.addEventListener('click', function(e) {
+              hamburger.classList.toggle('is-active');
+              menu.classList.toggle('visible');
+          });
+
+          var links = document.querySelectorAll('a');
+          for (var link of links) {
+              var a = new RegExp('/' + window.location.host + '/');
+              if (!a.test(link.href)) {
+                  link.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          }
+      });
+    </script>
+    
+  </body>
+</html>

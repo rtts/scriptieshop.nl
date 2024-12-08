@@ -1,0 +1,132 @@
+
+
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <title>Scriptieshop.nl - Verz kosten + betalen</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/hamburgers.css">
+    <link rel="stylesheet" href="../static/main10.scss.css">
+    <link rel="icon" href="https://www.scriptieshop.nl/static/favicon.png">
+    
+  </head>
+  <body>
+    
+
+      <header>
+        
+          
+            <img src="../static/logo.svg" alt="Scriptieshop.nl">
+          
+        
+      </header>
+
+      <nav>
+        
+          
+            <ul id="menu">
+              
+                <li><a href="../index.html" >Homepage</a></li>
+              
+                <li><a href="../over-ons/index.html" >Over ons</a></li>
+              
+                <li><a href="../voorwaarden/index.html" >Voorwaarden incl retour &amp; klacht</a></li>
+              
+                <li><a href="../aanlever-specificaties/index.html" >Aanlever specificaties</a></li>
+              
+                <li><a href="index.html" class="current">Verz kosten + betalen</a></li>
+              
+                <li><a href="../cart/index.html" >Winkelwagentje</a></li>
+              
+                <li><a href="../Contact/index.html" >Contact</a></li>
+              
+              
+            </ul>
+          
+          <button class="hamburger hamburger--collapse" id='hamburger'>
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        
+      </nav>
+
+      <article>
+        
+  
+    <div id="verzendkosten"></div>
+    
+
+<section class="text">
+  <div class="wrapper">
+    <div class="title">
+      <h1>
+        Verzendkosten
+      </h1>
+    </div>
+
+    <div class="content">
+      <p>Wij versleutelen uw bijdrage van € 4,95 in de verzend en verpakkingskosten niet in onze prijzen, we zijn liever duidelijk omdat elke verzending van elk bedrijf nu eenmaal  geld kost.</p>
+<p>Indien u kiest om het op te halen -Orthenstraat 63a 5211SW  Den Bosch- betaald u deze kosten niet. Wij bevinden ons in het centrum op 6 min lopen v/h station en een bezoek aan Den Bosch is altijd leuk. Kijk voor actuele openingstijden op <a href="https://www.copyshopdenbosch.nl">copyshopdenbosch.nl</a></p>
+    </div>
+
+    
+  </div>
+</section>
+
+  
+    <div id="betalen"></div>
+    
+
+<section class="text">
+  <div class="wrapper">
+    <div class="title">
+      <h1>
+        Betalen
+      </h1>
+    </div>
+
+    <div class="content">
+      <p>U betaald bij het geven van de opdracht per Ideal.</p>
+    </div>
+
+    
+  </div>
+</section>
+
+  
+
+  
+
+      </article>
+
+      
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+          var hamburger = document.getElementById('hamburger');
+          var menu = document.getElementById('menu');
+          hamburger.addEventListener('click', function(e) {
+              hamburger.classList.toggle('is-active');
+              menu.classList.toggle('visible');
+          });
+
+          var links = document.querySelectorAll('a');
+          for (var link of links) {
+              var a = new RegExp('/' + window.location.host + '/');
+              if (!a.test(link.href)) {
+                  link.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          }
+      });
+    </script>
+    
+  </body>
+</html>

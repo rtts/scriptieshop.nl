@@ -1,0 +1,114 @@
+
+
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <title>Scriptieshop.nl - Aanlever specificaties</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/hamburgers.css">
+    <link rel="stylesheet" href="../static/main10.scss.css">
+    <link rel="icon" href="https://www.scriptieshop.nl/static/favicon.png">
+    
+  </head>
+  <body>
+    
+
+      <header>
+        
+          
+            <img src="../static/logo.svg" alt="Scriptieshop.nl">
+          
+        
+      </header>
+
+      <nav>
+        
+          
+            <ul id="menu">
+              
+                <li><a href="../index.html" >Homepage</a></li>
+              
+                <li><a href="../over-ons/index.html" >Over ons</a></li>
+              
+                <li><a href="../voorwaarden/index.html" >Voorwaarden incl retour &amp; klacht</a></li>
+              
+                <li><a href="index.html" class="current">Aanlever specificaties</a></li>
+              
+                <li><a href="../kostenbetalen/index.html" >Verz kosten + betalen</a></li>
+              
+                <li><a href="../cart/index.html" >Winkelwagentje</a></li>
+              
+                <li><a href="../Contact/index.html" >Contact</a></li>
+              
+              
+            </ul>
+          
+          <button class="hamburger hamburger--collapse" id='hamburger'>
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        
+      </nav>
+
+      <article>
+        
+  
+    <div id="aanleveren-van-pdf-bestanden"></div>
+    
+
+<section class="text">
+  <div class="wrapper">
+    <div class="title">
+      <h1>
+        Aanleveren van PDF-bestanden
+      </h1>
+    </div>
+
+    <div class="content">
+      <p>Het bestel systeem werkt met PDF-bestanden in A4 formaat, dus sla uw Word, Indesign of ander bestand waarmee u  heeft gewerkt op als PDF. </p>
+<p>Altijd alle bladzijden in 1 bestand opslaan en deze gewoon achterelkaar (blz 1,2,3 etc), nooit bladzijden naast elkaar (spread) plaatsen a.u.b.</p>
+<p>Een boek is vrijwel altijd dubbelzijdig ook uw werkstuk waarschijnlijk, hou bij dubbelzijdig rekening met lege pagina&rsquo;s op de juiste plaats. U wilt bijvoorbeeld na de voorkaft een lege pagina op blz 2 zodat het voorwoord dan op het volgende vel op blz 3 staat. Ook kan een lege pagina handig zijn aan het eind van een hoofdstuk omdat het volgende hoofdstuk dan rechts op een oneven pagina begint. Hou rekening met de blz nummering in de inhoudsopgave als u dit achteraf doet.</p>
+<p>Laserprint-systemen printen niet helemaal tot de rand, wilt dat het op ware grote wordt afgedrukt dan graag alle informatie tenminste 5 mm uit de rand houden. Bij blad vullende foto&rsquo;s zal dus rond om een wit randje van 4-5 mm te zien zijn.</p>
+    </div>
+
+    
+  </div>
+</section>
+
+  
+
+  
+
+      </article>
+
+      
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+          var hamburger = document.getElementById('hamburger');
+          var menu = document.getElementById('menu');
+          hamburger.addEventListener('click', function(e) {
+              hamburger.classList.toggle('is-active');
+              menu.classList.toggle('visible');
+          });
+
+          var links = document.querySelectorAll('a');
+          for (var link of links) {
+              var a = new RegExp('/' + window.location.host + '/');
+              if (!a.test(link.href)) {
+                  link.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+              }
+          }
+      });
+    </script>
+    
+  </body>
+</html>
